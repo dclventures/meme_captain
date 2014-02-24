@@ -103,7 +103,7 @@ module MemeCaptain
 
     if options[:label].present?
       label = Magick::Draw.new
-      label.annotate(img, 0, 0, 0, 10, options[:label]) {
+      label.annotate(img, 0, 0, 0, 0, options[:label]) {
         self.gravity = Magick::SouthEastGravity
         self.pointsize = 12
         self.undercolor = '#000000'
