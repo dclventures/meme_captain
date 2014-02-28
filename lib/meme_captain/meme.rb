@@ -21,6 +21,8 @@ module MemeCaptain
 
     img.auto_orient!
 
+    img.border!(0, 200, "#000")
+
     super_sample = options[:super_sample] || 1.0
 
     text_layer = Magick::Image.new(
@@ -105,7 +107,7 @@ module MemeCaptain
       label = Magick::Draw.new
       label.annotate(img, 0, 0, 0, 0, options[:label]) {
         self.gravity = Magick::SouthEastGravity
-        self.pointsize = 12
+        self.pointsize = 14
         self.undercolor = '#000000'
         self.fill = '#ffffff'
         self.font_weight = Magick::BoldWeight
@@ -116,11 +118,11 @@ module MemeCaptain
   end
 
   # Shortcut to generate a typical meme with text at the top and bottom.
-  def meme_top_bottom(input, top_text, bottom_text, label = nil, options={})
+  def meme_top_bottom(input, top_text, bottom_text, meme_options, text_options={})
     meme(input, [
-      TextPos.new(top_text, 0.05, 0, 0.9, 0.25, options),
-      TextPos.new(bottom_text, 0.05, 0.75, 0.9, 0.25, options)
-      ], {:label => label})
+      TextPos.new(top_text, 0.05, 0, 0.9, 0.25, text_options),
+      TextPos.new(bottom_text, 0.05, 0.75, 0.9, 0.25, text_options)
+      ], meme_options)
   end
 
 end
